@@ -30,6 +30,7 @@ app.get('/test/bcrypt/:fake' , aCtrl.test)
 // FUNCTIONAL ENDPOINTS //
 
 app.post('/auth/login' , aCtrl.login)
+app.post('/auth/logout' , aCtrl.logout)
 
 // DB CONNECTION & LISTENING //
 

@@ -15,4 +15,13 @@ module.exports = {
     req.session.agent = isRegistered
     res.status(200).send({...isRegistered[0], agent_hash: true})
   } ,
+
+  async logout (req, res){
+    if(req.session.agent){
+      req.session.destroy()
+      res.status(200).send({message: 'Agent Logged Off'})
+    } else {
+      res.status(200).send({message: 'No Active Session'})
+    }
+  }
 }
