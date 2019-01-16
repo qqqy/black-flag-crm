@@ -5,12 +5,30 @@ import { loadDisplay } from '../../ducks/reducer'
 import axios from 'axios'
 
 class Search extends Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      searchTerm: '' ,
+    }
+    this.search = this.search.bind(this)
+  }
 
   componentDidMount(){
     axios.get('/load/display')
     .then((res) => {
       this.props.loadDisplay(res.data)
     })
+  }
+
+  async search(){
+    const { searchTerm } = this.state
+    try {
+      let res = await axios.get('/search/' + searchTerm)
+      this.props.loadDisplay(res.data)
+      this.setState({searchTerm: ''})
+    } catch(err) {
+      alert(err.message)
+    }
   }
   
   render(){
@@ -26,6 +44,15 @@ class Search extends Component{
     )
     return (
       <div className="search-main">
+      <div className="search-bar">
+        <input 
+          onChange={(e) => this.setState({searchTerm: e.target.value})}
+          value={this.state.searchTerm}
+        />
+        <button
+          onClick={this.search}
+        >Search</button>
+      </div>
         {results}
       </div>
     )

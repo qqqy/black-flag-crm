@@ -19,6 +19,7 @@ class Dashboard extends Component{
       const res = await Axios.get('/load/' + terms[i]).catch(err => {return console.log(err)})
       loader(res.data)
     })
+    console.log(this.props)
   }
 
   render(){

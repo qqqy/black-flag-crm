@@ -4,6 +4,7 @@ const massive = require('massive')
 const session = require('express-session')
 const aCtrl = require('./authController')
 const lCtrl = require('./loadController')
+const sCtrl = require('./searchController')
 const { CONNECTION_STRING , SERVER_PORT , SESSION_SECRET } = process.env
 
 const app = express()
@@ -35,6 +36,8 @@ app.post('/auth/logout' , aCtrl.logout)
 
 app.get('/load/display' , lCtrl.loadDisplay)
 app.get('/load/:term' , lCtrl.loadTerm)
+
+app.get('/search/:term' , sCtrl.searchTerm)
 
 // DB CONNECTION & LISTENING //
 
