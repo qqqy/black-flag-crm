@@ -1,0 +1,32 @@
+* {
+  --inte-width: 650px;
+}
+
+.dash-main {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.dash-inte {
+  width: var(--inte-width);
+  min-height: 100vh;
+  border: 1px dotted red;
+}
+
+.dash-right {
+  min-height: 100vh;
+  width: calc(100% - var(--inte-width));
+}
+
+.dash-nav {
+  height: 250px;
+  width: 100%;
+  border: 1px dotted red;
+}
+
+.dash-info {
+  height: calc(100% - 250px);
+  width: 100%;
+  border: 1px dotted red;
+}

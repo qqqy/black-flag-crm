@@ -3,6 +3,7 @@ const express = require('express')
 const massive = require('massive')
 const session = require('express-session')
 const aCtrl = require('./authController')
+const lCtrl = require('./loadController')
 const { CONNECTION_STRING , SERVER_PORT , SESSION_SECRET } = process.env
 
 const app = express()
@@ -31,6 +32,8 @@ app.get('/test/bcrypt/:fake' , aCtrl.test)
 
 app.post('/auth/login' , aCtrl.login)
 app.post('/auth/logout' , aCtrl.logout)
+
+app.get('/load/display' , lCtrl.loadDisplay)
 
 // DB CONNECTION & LISTENING //
 
