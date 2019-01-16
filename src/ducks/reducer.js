@@ -1,5 +1,11 @@
 const initialState = {
-  test: 'test'
+  agent: {} ,
+  display: [] ,
+  targetCustomer: {} ,
+  targetTicket: {} ,
+  flags: [] ,
+  tasks: [] ,
+  interactions: [] ,
 }
 
 
