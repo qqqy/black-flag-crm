@@ -1,0 +1,42 @@
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+input {
+  margin: 5px 10px;
+}
+
+.login-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.login-box {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 700px;
+  border: 2px solid black;
+}
+
+.login-logo-box {
+  flex-basis: 100%;
+}
+
+.login-inputs-box {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.login-strip {
+  display: flex;
+  align-items: center;
+}
+
