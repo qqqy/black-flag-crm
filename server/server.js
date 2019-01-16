@@ -34,6 +34,7 @@ app.post('/auth/login' , aCtrl.login)
 app.post('/auth/logout' , aCtrl.logout)
 
 app.get('/load/display' , lCtrl.loadDisplay)
+app.get('/load/:term' , lCtrl.loadTerm)
 
 // DB CONNECTION & LISTENING //
 

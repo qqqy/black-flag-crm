@@ -7,12 +7,23 @@ import Interaction from '../Interaction/Interaction';
 import Info from '../Info/Info';
 import Edit from '../Edit/Edit';
 import { Switch , Route } from 'react-router-dom'
+import { loadInteractions , loadCustomers, loadFlags, loadTasks } from '../../ducks/reducer'
+import Axios from 'axios';
 
 class Dashboard extends Component{
 
+  componentDidMount(){
+    const loaderArray = [this.props.loadInteractions , this.props.loadCustomers , this.props.loadFlags , this.props.loadTasks]
+    const terms = ['interaction' , 'customer' , 'flag' , 'task' ]
+    loaderArray.forEach(async (loader , i) => {
+      const res = await Axios.get('/load/' + terms[i]).catch(err => {return console.log(err)})
+      loader(res.data)
+    })
+  }
+
   render(){
     if(!this.props.agent.agent_id){this.props.history.push('/login')}
-    console.log(this.props)
+    // console.log(this.props)
     return (
     <div className="dash-main">
       <div className="dash-inte">
@@ -34,4 +45,11 @@ class Dashboard extends Component{
   }
 }
 
-export default connect((state) => state)(Dashboard)
+const actions = {
+  loadCustomers ,
+  loadInteractions ,
+  loadTasks ,
+  loadFlags
+}
+
+export default connect((state) => state , actions)(Dashboard)

@@ -1,5 +1,5 @@
 const initialState = {
-  agent: {} ,
+  agent: {agent_id: 0} ,
   display: [] ,
   targetCustomer: {} ,
   targetTicket: {} ,
