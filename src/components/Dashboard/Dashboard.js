@@ -7,23 +7,41 @@ import Interaction from '../Interaction/Interaction';
 import Info from '../Info/Info';
 import Edit from '../Edit/Edit';
 import { Switch , Route } from 'react-router-dom'
-import { loadInteractions , loadCustomers, loadFlags, loadTasks } from '../../ducks/reducer'
-import Axios from 'axios';
+import { loadInteractions , loadCustomers, loadFlags, loadTasks , loginAgent } from '../../ducks/reducer'
+import isLoggedIn from '../../lib/isLoggedIn'
+import axios from 'axios';
 
 class Dashboard extends Component{
+  constructor(props){
+    super(props)
+  
+    this.logout = this.logout.bind(this)
+  }
 
   componentDidMount(){
+    isLoggedIn(this.props)
     const loaderArray = [this.props.loadInteractions , this.props.loadCustomers , this.props.loadFlags , this.props.loadTasks]
     const terms = ['interaction' , 'customer' , 'flag' , 'task' ]
     loaderArray.forEach(async (loader , i) => {
-      const res = await Axios.get('/load/' + terms[i]).catch(err => {return console.log(err)})
+      const res = await axios.get('/load/' + terms[i]).catch(err => {return console.log(err)})
       loader(res.data)
     })
     console.log(this.props)
   }
 
+  logout(){
+    axios.post('/auth/logout').then(() => {
+      this.props.loginAgent({})
+      this.props.history.push('/login')
+    })
+    .catch((err) => {
+      alert(err.message)
+      this.props.loginAgent({})
+      this.props.history.push('/login')
+    })
+  }
+
   render(){
-    if(!this.props.agent.agent_id){this.props.history.push('/login')}
     // console.log(this.props)
     return (
     <div className="dash-main">
@@ -32,7 +50,7 @@ class Dashboard extends Component{
       </div>
       <div className="dash-right">
         <div className="dash-nav">
-          <Nav/>
+          <Nav logout={() => this.logout()}/>
         </div>
         <div className="dash-info">
           <Switch>
@@ -50,7 +68,8 @@ const actions = {
   loadCustomers ,
   loadInteractions ,
   loadTasks ,
-  loadFlags
+  loadFlags ,
+  loginAgent
 }
 
 export default connect((state) => state , actions)(Dashboard)
