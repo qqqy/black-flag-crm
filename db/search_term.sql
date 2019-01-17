@@ -13,3 +13,4 @@ or agent_email ilike $(fullTerm)
 or flag_name ilike $(fullTerm)
 or inte_title ilike $(fullTerm)
 or inte_body ilike $(fullTerm)
+limit 10

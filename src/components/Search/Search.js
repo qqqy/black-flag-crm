@@ -3,12 +3,14 @@ import './Search.css';
 import { connect } from 'react-redux';
 import { loadDisplay } from '../../ducks/reducer'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 class Search extends Component{
   constructor(props){
     super(props)
     this.state = {
       searchTerm: '' ,
+      customerSort: false ,
     }
     this.search = this.search.bind(this)
   }
@@ -38,7 +40,9 @@ class Search extends Component{
           <p>{result.inte_title}</p>
           <p>{result.inte_date}</p>
           <p>{result.agent_name}</p>
+          <Link to={`/info/customer/${result.cust_id}`}>
           <p>{result.cust_name}</p>
+          </Link>
         </div>
       )}
     )
@@ -53,6 +57,8 @@ class Search extends Component{
           onClick={this.search}
         >Search</button>
       </div>
+      <input type="checkbox" onChange={() => this.setState({customerSort: !this.state.customerSort})}/>
+      <span>Sort by Customer</span>
         {results}
       </div>
     )

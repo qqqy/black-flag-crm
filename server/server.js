@@ -28,6 +28,7 @@ app.get('/test/db' , async (req, res) => {
 app.get('/test/server' , (req, res) => res.sendStatus(200))
 app.get('/test/session' , (req, res) => res.status(200).send(req.session))
 app.get('/test/bcrypt/:fake' , aCtrl.test)
+app.post('/test/builder' , sCtrl.testQueryBuilder)
 
 // FUNCTIONAL ENDPOINTS //
 
@@ -36,6 +37,7 @@ app.post('/auth/logout' , aCtrl.logout)
 
 app.get('/load/display' , lCtrl.loadDisplay)
 app.get('/load/:term' , lCtrl.loadTerm)
+app.get('/target/:term' , lCtrl.targetTerm)
 
 app.get('/search/:term' , sCtrl.searchTerm)
 

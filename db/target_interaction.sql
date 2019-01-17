@@ -1,2 +1,2 @@
 select * from interaction
-where inte_ticket = $(id)
+where inte_id = $(id)

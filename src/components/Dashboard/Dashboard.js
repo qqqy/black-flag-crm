@@ -42,7 +42,6 @@ class Dashboard extends Component{
   }
 
   render(){
-    // console.log(this.props)
     return (
     <div className="dash-main">
       <div className="dash-inte">
@@ -55,7 +54,7 @@ class Dashboard extends Component{
         <div className="dash-info">
           <Switch>
             <Route path="/" component={Search} exact />
-            <Route path="/info" component={Info} />
+            <Route path="/info/:type/:id" component={Info} />
             <Route path="/edit" component={Edit} />
           </Switch>
         </div>

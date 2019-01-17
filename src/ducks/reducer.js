@@ -1,8 +1,9 @@
 const initialState = {
-  agent: {agent_id: 0} ,
+  agent: {agent_id: 1} ,
   display: [] ,
-  targetCustomer: {} ,
-  targetTicket: {} ,
+  targetCustomerInfo: {} ,
+  targetTicketInfo: {} ,
+  targetInteractionInfo: {} ,
   flags: [] ,
   tasks: [] ,
   interactions: [] ,
@@ -14,6 +15,9 @@ const LOAD_INTERACTIONS = 'LOAD_INTERACTIONS'
 const LOAD_CUSTOMERS = 'LOAD_CUSTOMERS'
 const LOAD_FLAGS = 'LOAD_FLAGS'
 const LOAD_TASKS = 'LOAD_TASKS'
+const TARGET_CUSTOMER = 'TARGET_CUSTOMER'
+const TARGET_TICKET = 'TARGET_TICKET'
+const TARGET_INTERACTION = 'TARGET_INTERACTION'
 
 export function loginAgent(agentObject){
   return {
@@ -57,6 +61,25 @@ export function loadTasks(tasksArray){
   }
 }
 
+export function targetCustomer(customerObject){
+  return {
+    type: TARGET_CUSTOMER ,
+    payload: customerObject
+  }
+}
+export function targetTicket(ticketObject){
+  return {
+    type: TARGET_TICKET ,
+    payload: ticketObject
+  }
+}
+export function targetInteraction(interactionObject){
+  return {
+    type: TARGET_INTERACTION ,
+    payload: interactionObject
+  }
+}
+
 export default function reducer(state=initialState , action){
   switch(action.type){
     case LOGIN_AGENT :
@@ -71,6 +94,12 @@ export default function reducer(state=initialState , action){
       return {...state , flags: action.payload}
     case LOAD_TASKS :
       return {...state , tasks: action.payload}
+    case TARGET_CUSTOMER :
+      return {...state , targetCustomerInfo: action.payload}
+    case TARGET_TICKET :
+      return {...state , targetTicketInfo: action.payload}
+    case TARGET_INTERACTION :
+      return {...state , targetInteractionInfo: action.payload}
     default:
       return state
   }

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { loginAgent } from '../../ducks/reducer';
 
 function Nav(props){
-  console.log(props)
   const {agent_name , agent_email , agent_company } = props.agent
   return (
     <div className="nav-main">
