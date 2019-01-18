@@ -8,8 +8,8 @@ class Login extends Component {
   constructor(props){
     super(props)
     this.state = {
-      email: '',
-      password: '',
+      email: 't',
+      password: 't',
     }
     this.login = this.login.bind(this)
   }

@@ -1,5 +1,15 @@
 const initialState = {
-  agent: {agent_id: 1} ,
+  agent: {
+    "agent_id": 1,
+    "agent_name": "t",
+    "agent_email": "t",
+    "agent_hash": true,
+    "agent_permission": 1,
+    "agent_has_task": false,
+    "agent_layout": 1,
+    "agent_company": "test company",
+    "agent_picture": "default/default_agent_picture.png"
+} ,
   display: [] ,
   targetCustomerInfo: {} ,
   targetTicketInfo: {} ,
@@ -8,6 +18,7 @@ const initialState = {
   tasks: [] ,
   interactions: [] ,
   customers: [] ,
+  pictureUrl: 'https://s3.us-east-2.amazonaws.com/black-flag-project/' ,
 }
 const LOGIN_AGENT = 'LOGIN_AGENT'
 const LOAD_DISPLAY = 'LOAD_DISPLAY'

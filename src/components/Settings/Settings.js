@@ -2,6 +2,7 @@ import React , { Component } from 'react';
 import './Settings.css'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import { loginAgent } from '../../ducks/reducer'
 
 class Settings extends Component{
   constructor(props){
@@ -22,7 +23,7 @@ class Settings extends Component{
       }
     })
     .then(res => {
-      console.log(res)
+      this.props.loginAgent(res.data.agent)
     })
     .catch (err => {
       console.log(err)
@@ -37,7 +38,9 @@ class Settings extends Component{
     if(!this.props.agent.agent_id){this.props.history.push('/login')}
     return (
     <div className="settings-main">
-    <img className='settings-img' src='' alt='Agent' />
+    <img className='settings-img' 
+      src={this.props.pictureUrl + this.props.agent.agent_picture} 
+      alt='Agent' />
       <form onSubmit={this.submitFile}>
         <input label='upload file' type='file' onChange={this.handleFileUpload} />
         <button type='submit'>Send</button>
@@ -46,4 +49,4 @@ class Settings extends Component{
   }
 }
 
-export default connect((state) => state)(Settings)
+export default connect((state) => state , {loginAgent})(Settings)

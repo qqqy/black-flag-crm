@@ -12,7 +12,7 @@ module.exports = {
     const db = req.app.get('db')
     const isRegistered = await db.login({ email }).catch(err => res.status(200).send(err))
     if(!isRegistered[0] || !bcrypt.compareSync(password , isRegistered[0].agent_hash)){return res.status(401).send({message: 'Incorrect Username or Password'})}
-    req.session.agent = isRegistered
+    req.session.agent = isRegistered[0]
     res.status(200).send({...isRegistered[0], agent_hash: true})
   } ,
 
