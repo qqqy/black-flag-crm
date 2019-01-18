@@ -37,7 +37,8 @@ class Info extends Component{
       case 'ticket':
         return 'targetTicket';
       case 'interaction':
-        return 'targetInteraction'
+        return 'targetInteraction';
+      default: return 'targetCustomer'
     }}
     try {
       let res = await axios.get(`/load/${type}?id=${id}`)

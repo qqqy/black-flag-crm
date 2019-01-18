@@ -23,8 +23,10 @@ class Dashboard extends Component{
     const loaderArray = [this.props.loadInteractions , this.props.loadCustomers , this.props.loadFlags , this.props.loadTasks]
     const terms = ['interaction' , 'customer' , 'flag' , 'task' ]
     loaderArray.forEach(async (loader , i) => {
-      const res = await axios.get('/load/' + terms[i]).catch(err => {return console.log(err)})
+       try {
+      const res = await axios.get('/load/' + terms[i])
       loader(res.data)
+      } catch (err) {return console.log(err)}
     })
     console.log(this.props)
   }
