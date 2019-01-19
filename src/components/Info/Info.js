@@ -2,7 +2,7 @@ import React , { Component } from 'react'
 import './Info.css'
 import { Link , Switch , Route} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { targetCustomer , targetTicket , targetInteraction , loadDisplay } from '../../ducks/reducer'
+import { targetCustomer , targetTicket , targetInteraction , loadDisplay , loadEditTarget } from '../../ducks/reducer'
 import axios from 'axios'
 
 class Info extends Component{
@@ -51,8 +51,13 @@ class Info extends Component{
   }
 
   customerView(){
+    const { type , id } = this.props.match.params
     let list = this.props.display.map((inte , i) => {
-      return (<div key={i}>{inte.inte_flag} , {inte.inte_title} , {inte.inte_date} , {inte.inte_agent}</div>)})
+      return (
+      <div key={i}>{inte.inte_flag} , {inte.inte_title} , {inte.inte_date} , {inte.inte_agent}
+        <button onClick={() => this.props.history.push(`/info/interaction/${id}`)}>View</button>
+      </div>
+      )})
     const { cust_name , cust_email , cust_phone } = this.props.targetCustomerInfo
     return (
       <>
@@ -92,10 +97,16 @@ class Info extends Component{
       <div>
         <p>{inte_body}</p>
       </div>
+      <button onClick={() => this.edit(this.props.targetInteractionInfo)}>edit</button>
       </>
     )
   }
-    
+
+  edit = (targetObject) => {
+    this.props.loadEditTarget(targetObject)
+    const { type , id } = this.props.match.params
+    this.props.history.push(`/edit/${type}/${id}`)
+  }
     
     render(){
     return(
@@ -126,6 +137,7 @@ const actions = {
   targetTicket ,
   targetInteraction ,
   loadDisplay ,
+  loadEditTarget ,
 }
 
 export default connect(mapStateToProps , actions)(Info)

@@ -6,6 +6,7 @@ const aCtrl = require('./authController')
 const lCtrl = require('./loadController')
 const sCtrl = require('./searchController')
 const wCtrl = require('./awsController')
+const uCtrl = require('./updateDatabaseController')
 const { CONNECTION_STRING , SERVER_PORT , SESSION_SECRET , AWS_ACCESS_KEY_ID , AWS_SECRET_ACCESS_KEY ,  BUCKET_NAME } = process.env
 
 // SETUP //
@@ -46,6 +47,12 @@ app.get('/target/:term' , lCtrl.targetTerm)
 
 app.get('/search/:term' , sCtrl.searchTerm)
 
+// INSERT AND UPDATE ENDPOINTS, FOR MAKING EDITS //
+
+app.patch('/save/interaction' , uCtrl.saveInteraction)
+
+// AWS ENDPOINT //
+
 app.post('/upload/image' , wCtrl.uploadPicture)
 
 // DB CONNECTION & LISTENING //
@@ -54,3 +61,7 @@ massive(CONNECTION_STRING).then(instance => {
   app.set('db' , instance)
   app.listen(SERVER_PORT , () => console.log(SERVER_PORT + ' is our port in the storm.') )
 })
+
+// TESTING EXPORTS //
+
+exports.db = app.get('db')

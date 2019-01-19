@@ -35,7 +35,6 @@ class Settings extends Component{
   }
 
   render(){
-    if(!this.props.agent.agent_id){this.props.history.push('/login')}
     return (
     <div className="settings-main">
     <img className='settings-img' 
@@ -45,6 +44,7 @@ class Settings extends Component{
         <input label='upload file' type='file' onChange={this.handleFileUpload} />
         <button type='submit'>Send</button>
       </form>
+      <button onClick={()=>(this.props.history.push('/'))}>Return</button>
     </div>)
   }
 }

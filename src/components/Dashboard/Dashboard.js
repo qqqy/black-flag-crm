@@ -19,7 +19,7 @@ class Dashboard extends Component{
   }
 
   componentDidMount(){
-    isLoggedIn(this.props)
+    // isLoggedIn(this.props)
     const loaderArray = [this.props.loadInteractions , this.props.loadCustomers , this.props.loadFlags , this.props.loadTasks]
     const terms = ['interaction' , 'customer' , 'flag' , 'task' ]
     loaderArray.forEach(async (loader , i) => {
@@ -57,7 +57,7 @@ class Dashboard extends Component{
           <Switch>
             <Route path="/" component={Search} exact />
             <Route path="/info/:type/:id" component={Info} />
-            <Route path="/edit" component={Edit} />
+            <Route path="/edit/:type/:id" component={Edit} />
           </Switch>
         </div>
       </div>
@@ -70,7 +70,7 @@ const actions = {
   loadInteractions ,
   loadTasks ,
   loadFlags ,
-  loginAgent
+  loginAgent ,
 }
 
 export default connect((state) => state , actions)(Dashboard)

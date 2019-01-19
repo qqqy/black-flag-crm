@@ -2,6 +2,7 @@ import React from 'react';
 import './Nav.css';
 import { connect } from 'react-redux';
 import { loginAgent } from '../../ducks/reducer';
+import { Link } from 'react-router-dom'
 
 function Nav(props){
   const {agent_name , agent_email , agent_company } = props.agent
@@ -14,6 +15,9 @@ function Nav(props){
     <button
       onClick={props.logout}
     >Logout</button>
+    <Link to='/settings'>
+    <button>Settings</button>
+    </Link>
     </div>
   )
 }

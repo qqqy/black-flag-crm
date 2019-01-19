@@ -19,6 +19,7 @@ const initialState = {
   interactions: [] ,
   customers: [] ,
   pictureUrl: 'https://s3.us-east-2.amazonaws.com/black-flag-project/' ,
+  editTarget: {} ,
 }
 const LOGIN_AGENT = 'LOGIN_AGENT'
 const LOAD_DISPLAY = 'LOAD_DISPLAY'
@@ -26,6 +27,7 @@ const LOAD_INTERACTIONS = 'LOAD_INTERACTIONS'
 const LOAD_CUSTOMERS = 'LOAD_CUSTOMERS'
 const LOAD_FLAGS = 'LOAD_FLAGS'
 const LOAD_TASKS = 'LOAD_TASKS'
+const LOAD_EDIT_TARGET = 'LOAD_EDIT_TARGET'
 const TARGET_CUSTOMER = 'TARGET_CUSTOMER'
 const TARGET_TICKET = 'TARGET_TICKET'
 const TARGET_INTERACTION = 'TARGET_INTERACTION'
@@ -91,6 +93,13 @@ export function targetInteraction(interactionObject){
   }
 }
 
+export function loadEditTarget(targetObject){
+  return {
+    type: LOAD_EDIT_TARGET ,
+    payload: targetObject ,
+  }
+}
+
 export default function reducer(state=initialState , action){
   switch(action.type){
     case LOGIN_AGENT :
@@ -111,6 +120,8 @@ export default function reducer(state=initialState , action){
       return {...state , targetTicketInfo: action.payload}
     case TARGET_INTERACTION :
       return {...state , targetInteractionInfo: action.payload}
+    case LOAD_EDIT_TARGET :
+      return {...state , editTarget: action.payload}
     default:
       return state
   }
