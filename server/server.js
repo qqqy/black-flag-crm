@@ -44,6 +44,7 @@ app.post('/auth/logout' , aCtrl.logout)
 app.get('/load/display' , lCtrl.loadDisplay)
 app.get('/load/:term' , lCtrl.loadTerm)
 app.get('/target/:term' , lCtrl.targetTerm)
+app.get('/load/:column/:table/' , lCtrl.load)
 
 app.get('/search/:term' , sCtrl.searchTerm)
 

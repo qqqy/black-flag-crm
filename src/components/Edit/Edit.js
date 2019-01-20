@@ -3,22 +3,89 @@ import './Edit.css';
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { loadEditTarget , targetInteraction } from '../../ducks/reducer'
-import InteractionLayout from './InteractionLayout/InteractionLayout';
 
 class Edit extends Component{
   constructor(props){
     super(props)
     this.state = {
       target: {},
+      test: 'Select an Option',
+      content: {} ,
+      ready: false ,
+      lists: 100 ,
     }
   }
 
   async componentDidMount(){
-    console.log('Edit Props:' , this.props)
+    // a filter needs to be added here to determine which layout we're using //
+    this.setState({lists: 3})
+      await this.loadOptions('flag_id , flag_name' , 'flag')
+      await this.loadOptions('tick_id , tick_title' , 'ticket')
+      await this.loadOptions('agent_id , agent_name' , 'agent')
+      // console.log('survey says' , this.layoutInteraction())
+    
+    // console.log('Edit Props:' , this.props)
     const { type , id } = this.props.match.params
-    // try {
-    //   axios.get
-    // }
+    try {
+      let res = await axios.get(`/target/${type}?id=${id}`)
+      this.props.loadEditTarget(res.data)
+      this.props.targetInteraction(res.data)
+      this.setState({target: res.data})
+    } catch (err) {
+      alert(err.message)
+    }
+  }
+
+  loadOptions = async (column , table) => {
+    let options = []
+    if(!column || !table){return alert('createDropMenu requires a column argument and table argument')}
+    try {
+      let res = await axios.get(`/load/${column}/${table}`)
+      options = res.data
+    } catch (error) {
+      console.log(error.message)
+    }
+    this.setState({content: {...this.state.content, [table]: options} , lists: this.state.lists - 1})
+    // console.log('loadOptions Complete, content is now' , this.state.content)
+  }
+
+  createOptions = (table , idColumn , nameColumn) => {
+    const options = this.state.content[table].map((option , i) => {
+      // console.log(option)
+      return (
+        <option key={`${table}_${i}`} value={option[idColumn]} >{option[idColumn]}, {option[nameColumn]}</option>
+      )
+    })
+    return options
+  }
+
+  layoutInteraction = () => {
+    let flagOptions = this.createOptions('flag' , 'flag_id' , 'flag_name')
+    let agentOptions = this.createOptions('agent' , 'agent_id' , 'agent_name')
+    let ticketOptions = this.createOptions('ticket' , 'tick_id' , 'tick_title')
+
+    return (
+      <>
+      <div className="edit-left">
+      <form>
+        <select value={this.state.target.inte_flag} onChange={(e) => this.setState({target: {...this.state.target , inte_flag: e.target.value}})}>
+          {flagOptions}
+        </select>
+        <select value={this.state.target.inte_agent} onChange={(e) => this.setState({target: {...this.state.target , inte_agent: e.target.value}})}>
+          {agentOptions}
+        </select>
+        <select value={this.state.target.inte_ticket} onChange={(e) => this.setState({target: {...this.state.target , inte_ticket: e.target.value}})}>
+          {ticketOptions}
+        </select>
+      </form>
+    </div>
+    <div className="edit-body">
+      <p><input label="inte_title" defaultValue={this.props.editTarget.inte_title} onChange={(e) => this.setState({target: {...this.state.target , inte_title: e.target.value}})} /> </p>
+      <p><textarea label="inte_body" value={this.state.target.inte_body} onChange={(e) => this.setState({target: {...this.state.target , inte_body: e.target.value}})} /> </p>
+      <button onClick={this.saveEdit}>Save Changes</button>
+    </div>
+    </>
+    )
   }
 
   saveEdit = async () => {
@@ -27,18 +94,12 @@ class Edit extends Component{
     this.props.targetInteraction(res.data)
     this.props.history.goBack()
   }
-
-  setTarget = (e) => {
-    this.setState({target: {...this.props.editTarget , inte_body: e.target.value}})
-  }
   
   render(){
+    let loading = (<div>Loading...</div>)
     return (
       <div className="edit-main">
-        <input onChange={this.setTarget} defaultValue={this.props.editTarget.inte_body} />
-        <button onClick={this.saveEdit}>save</button>
-        <div className="edit-title"></div>
-        <div className="edit-body"></div>
+        {!this.state.lists ? this.layoutInteraction() : loading}
       </div>
     )
   }
