@@ -1,21 +1,12 @@
 const initialState = {
-  agent: {
-    "agent_id": 1,
-    "agent_name": "t",
-    "agent_email": "t",
-    "agent_hash": true,
-    "agent_permission": 1,
-    "agent_has_task": false,
-    "agent_layout": 1,
-    "agent_company": "test company",
-    "agent_picture": "default/default_agent_picture.png"
-} ,
+  agent: {} ,
   display: [] ,
   targetCustomerInfo: {} ,
   targetTicketInfo: {} ,
   targetInteractionInfo: {} ,
   flags: [] ,
   tasks: [] ,
+  tickets: [] ,
   interactions: [] ,
   customers: [] ,
   pictureUrl: 'https://s3.us-east-2.amazonaws.com/black-flag-project/' ,
@@ -27,6 +18,7 @@ const LOAD_INTERACTIONS = 'LOAD_INTERACTIONS'
 const LOAD_CUSTOMERS = 'LOAD_CUSTOMERS'
 const LOAD_FLAGS = 'LOAD_FLAGS'
 const LOAD_TASKS = 'LOAD_TASKS'
+const LOAD_TICKETS = 'LOAD_TICKETS'
 const LOAD_EDIT_TARGET = 'LOAD_EDIT_TARGET'
 const TARGET_CUSTOMER = 'TARGET_CUSTOMER'
 const TARGET_TICKET = 'TARGET_TICKET'
@@ -74,18 +66,27 @@ export function loadTasks(tasksArray){
   }
 }
 
+export function loadTickets(ticketsArray){
+  return {
+    type: LOAD_TICKETS ,
+    payload: ticketsArray
+  }
+}
+
 export function targetCustomer(customerObject){
   return {
     type: TARGET_CUSTOMER ,
     payload: customerObject
   }
 }
+
 export function targetTicket(ticketObject){
   return {
     type: TARGET_TICKET ,
     payload: ticketObject
   }
 }
+
 export function targetInteraction(interactionObject){
   return {
     type: TARGET_INTERACTION ,
@@ -114,6 +115,8 @@ export default function reducer(state=initialState , action){
       return {...state , flags: action.payload}
     case LOAD_TASKS :
       return {...state , tasks: action.payload}
+    case LOAD_TICKETS :
+      return {...state , tickets: action.payload}
     case TARGET_CUSTOMER :
       return {...state , targetCustomerInfo: action.payload}
     case TARGET_TICKET :

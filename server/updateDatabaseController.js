@@ -9,5 +9,14 @@ module.exports = {
     } catch (err) {
       res.status(200).send(err.message)
     }
+  } ,
+  async newInteraction (req , res) {
+    const db = req.app.get('db')
+    try{
+      let interaction = await db.new_interaction(req.body)
+      res.status(201).send(interaction[0])
+    } catch (error){
+      res.status(200).send(error.message)
+    }
   }
 }

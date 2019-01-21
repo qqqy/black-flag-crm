@@ -41,7 +41,7 @@ class Info extends Component{
       default: return 'targetCustomer'
     }}
     try {
-      let res = await axios.get(`/load/${type}?id=${id}`)
+      let res = await axios.get(`/subload/${type}?id=${id}`)
       this.props.loadDisplay(res.data)
       let newRes = await axios.get(`/target/${type}?id=${id}`)
       this.props[functionName](newRes.data)

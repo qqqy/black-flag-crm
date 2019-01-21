@@ -43,14 +43,18 @@ app.post('/auth/logout' , aCtrl.logout)
 
 app.get('/load/display' , lCtrl.loadDisplay)
 app.get('/load/:term' , lCtrl.loadTerm)
-app.get('/target/:term' , lCtrl.targetTerm)
 app.get('/load/:column/:table/' , lCtrl.load)
+
+app.get('/subload/:term' , lCtrl.subload)
+
+app.get('/target/:term' , lCtrl.targetTerm)
 
 app.get('/search/:term' , sCtrl.searchTerm)
 
 // INSERT AND UPDATE ENDPOINTS, FOR MAKING EDITS //
 
 app.patch('/save/interaction' , uCtrl.saveInteraction)
+app.put('/new/interaction' , uCtrl.newInteraction)
 
 // AWS ENDPOINT //
 
