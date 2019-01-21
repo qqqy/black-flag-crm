@@ -28,4 +28,18 @@ module.exports = {
       res.status(200).send(error.message)
     } 
   } ,
+
+  async delete (req , res){
+    const { table , column , id } = req.params
+    const db = req.app.get('db')
+    try {
+      await db.query(`
+      DELETE FROM ${table}
+      WHERE ${column} = ${id}
+      `)
+      res.sendStatus(204)
+    } catch (error) {
+      res.status(200).send(error.message)
+    }
+  }
 }

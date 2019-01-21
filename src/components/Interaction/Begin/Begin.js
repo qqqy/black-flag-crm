@@ -15,6 +15,7 @@ function Begin(props) {
     <label>
       Choose Customer
       <select value={props.targetCustomerInfo.cust_id} onChange={props.targetCustomer}>
+        <option key={'C0'} value={0} onChange={props.targetCustomer}>-- Choose Customer --</option>
         {custOptions}
       </select>
     </label>

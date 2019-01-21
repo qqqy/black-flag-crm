@@ -83,6 +83,7 @@ class Edit extends Component{
       <p><input label="inte_title" defaultValue={this.props.editTarget.inte_title} onChange={(e) => this.setState({target: {...this.state.target , inte_title: e.target.value}})} /> </p>
       <p><textarea label="inte_body" value={this.state.target.inte_body} onChange={(e) => this.setState({target: {...this.state.target , inte_body: e.target.value}})} /> </p>
       <button onClick={this.saveEdit}>Save Changes</button>
+      <button onClick={this.delete}>Delete Interaction</button>
     </div>
     </>
     )
@@ -93,6 +94,37 @@ class Edit extends Component{
     let res = await axios.patch('/save/' + type , this.state.target )
     this.props.targetInteraction(res.data)
     this.props.history.goBack()
+  }
+
+  delete = async () => {
+    const {type , id} = this.props.match.params
+    var name = ''
+    var column = ''
+    var pushString = '/'
+    switch(type){
+      case 'interaction' :
+        name = 'inte_title'
+        column = 'inte_id'
+        pushString = `/info/customer/${this.props.targetCustomerInfo.cust_id}`
+        break
+      case 'ticket' :
+        name = 'tick_title'
+        column = 'tick_id'
+        break;
+      case 'customer' :
+        name = 'cust_name'
+        column = 'cust_id'
+        break;
+      default: return alert('Invalid Type -- Check Switch!')
+    }
+    try {
+      await axios.delete(`/delete/${type}/${column}/${id}`)
+      alert(`"${this.props.editTarget[name]}" Deleted!`)
+      this.props.loadEditTarget({})
+      this.props.history.push(pushString)
+    } catch (error) {
+      alert("Unable to Delete! Reason:" + error)
+    }
   }
   
   render(){
@@ -106,9 +138,10 @@ class Edit extends Component{
 }
 
 function mapStateToProps(state){
-  const { editTarget } = state
+  const { editTarget , targetCustomerInfo } = state
   return {
-    editTarget
+    editTarget ,
+    targetCustomerInfo ,
   }
 }
 

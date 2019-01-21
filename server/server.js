@@ -57,6 +57,8 @@ app.patch('/save/interaction' , uCtrl.saveInteraction)
 app.put('/new/interaction' , uCtrl.newInteraction)
 app.put('/new/ticket' , uCtrl.newTicket)
 
+app.delete('/delete/:table/:column/:id' , uCtrl.delete)
+
 // AWS ENDPOINT //
 
 app.post('/upload/image' , wCtrl.uploadPicture)
