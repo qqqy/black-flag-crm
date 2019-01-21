@@ -20,7 +20,7 @@ class Interaction extends Component{
       } ,
       newTicket: {
         tick_agent: this.props.agent.agent_id,
-        tick_customer: this.props.targetCustomerInfo ,
+        tick_customer: this.props.targetCustomerInfo.cust_id ,
         tick_title: '' ,
         tick_reference: null ,
       } ,
@@ -43,12 +43,14 @@ class Interaction extends Component{
 
 
   update = (column , newVal) => {
+    if(this.state.newInteraction.inte_ticket == 0 && column === 'inte_title'){this.setState({newTicket:{...this.state.newTicket , tick_title: newVal}})}
     this.setState({newInteraction: {...this.state.newInteraction , [column]: newVal}})
   }
 
   targetCustomer = async (e) => {
     let res = await axios.get(`/target/customer?id=${e.target.value}`)
     this.props.targetCustomer(res.data)
+    this.setState({newTicket: {...this.state.newTicket , tick_customer: +res.data.cust_id}})
   }
   
   targetTicket = async (e) => {
@@ -69,7 +71,7 @@ class Interaction extends Component{
       case 'Begin':
         return (<Begin update={this.update} customers={this.props.customers} targetCustomer={this.targetCustomer} targetTicket={this.targetTicket} next={this.next} />)
       case 'Finalize':
-        return (<Finalize update={this.update} />)
+        return (<Finalize update={this.update} new={this.new} />)
       default :
         return (<>Something went wrong! Please refresh.</>)
     }
@@ -86,10 +88,29 @@ class Interaction extends Component{
     }
   }
 
+  new = async () => {
+    if(this.state.newInteraction.inte_ticket == 0){
+      try {
+        let res = await axios.put('/new/ticket' , this.state.newTicket)
+        this.setState({newInteraction:{...this.state.newInteraction , inte_ticket: res.data.tick_id}})
+      } catch (error) {
+        console.log(error.message)
+      }
+      console.log("Should be First")
+    }
+    try {
+      let res = axios.put('/new/interaction' , this.state.newInteraction)
+      console.log("Should be second")
+      this.next()
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   render(){
     return (
       <div className="inte-main">
-      <button onClick={() => console.log(this.state.newInteraction)}>DEBUG See Interaction</button>
+      <button onClick={() => console.log(this.state.newInteraction , this.state.newTicket , this.props)}>DEBUG See Interaction</button>
       {this.view()}
       </div>
     )

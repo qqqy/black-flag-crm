@@ -55,7 +55,7 @@ class Info extends Component{
     let list = this.props.display.map((inte , i) => {
       return (
       <div key={i}>{inte.inte_flag} , {inte.inte_title} , {inte.inte_date} , {inte.inte_agent}
-        <button onClick={() => this.props.history.push(`/info/interaction/${id}`)}>View</button>
+        <button onClick={() => this.props.history.push(`/info/interaction/${inte.inte_id}`)}>View</button>
       </div>
       )})
     const { cust_name , cust_email , cust_phone } = this.props.targetCustomerInfo

@@ -17,6 +17,15 @@ module.exports = {
       res.status(201).send(interaction[0])
     } catch (error){
       res.status(200).send(error.message)
-    }
-  }
+    } 
+  } ,
+  async newTicket (req , res) {
+    const db = req.app.get('db')
+    try{
+      let interaction = await db.new_ticket(req.body)
+      res.status(201).send(interaction[0])
+    } catch (error){
+      res.status(200).send(error.message)
+    } 
+  } ,
 }

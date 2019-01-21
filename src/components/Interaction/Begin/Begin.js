@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 function Begin(props) {
   let custOptions = props.customers.map((customer , i) => {
     return (
-    <option key={'C' + i} value={customer.cust_id}>{customer.cust_name}</option>
+    <option key={'C' + i} value={customer.cust_id} onChange={props.targetCustomer}>{customer.cust_name}</option>
   )})
   let tickOptions = props.tickets.map((ticket , i) => {return(
     <option key={'T' + i} value={ticket.tick_id} onChange={props.targetTicket}>{ticket.tick_title}</option>

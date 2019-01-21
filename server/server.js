@@ -55,6 +55,7 @@ app.get('/search/:term' , sCtrl.searchTerm)
 
 app.patch('/save/interaction' , uCtrl.saveInteraction)
 app.put('/new/interaction' , uCtrl.newInteraction)
+app.put('/new/ticket' , uCtrl.newTicket)
 
 // AWS ENDPOINT //
 
