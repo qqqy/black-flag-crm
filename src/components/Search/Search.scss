@@ -1,0 +1,12 @@
+@import '../../scss/card';
+@import '../../scss/flag';
+
+.search-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  .card {
+    @extend %card;
+  }
+}

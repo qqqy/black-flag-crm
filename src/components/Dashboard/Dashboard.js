@@ -1,5 +1,5 @@
 import React , { Component } from 'react';
-import './Dashboard.css';
+import './Dashboard.scss';
 import { connect } from 'react-redux';
 import Search from '../Search/Search';
 import Nav from '../Nav/Nav';
@@ -10,6 +10,7 @@ import { Switch , Route } from 'react-router-dom'
 import { loadInteractions , loadCustomers, loadFlags, loadTasks , loadTickets , loginAgent } from '../../ducks/reducer'
 import isLoggedIn from '../../lib/isLoggedIn'
 import axios from 'axios';
+import testSVG from '../../svg/svgTest.svg'
 
 class Dashboard extends Component{
   constructor(props){

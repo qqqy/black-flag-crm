@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Arimo|Mukta+Malar|Work+Sans');
+
+* {
+  --inte-width: 650px;
+  --nav-height: 200px;
+  --d-margin: 10px;
+  --dark: rgb(25 , 37 , 59);
+  --mid: rgb(60 , 82 , 129);
+  --light: rgb(153, 204, 255);
+  --bright: rgb(202, 253, 254);
+  --accent: rgb(100, 34, 20);
+  --shadow: 2px 2px 2px var(--dark);
+
+  font-family: 'Arimo';
+}
+
+.dash-main {
+  height: calc(100vh);
+  width: 100vw;
+  background: var(--mid);
+  display: flex;
+}
+
+%main {
+  background: var(--light);
+  margin: var(--d-margin);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.dash-inte {
+  @extend %main;
+  width: var(--inte-width);
+}
+
+.dash-right {
+  width: calc(100vw - var(--inte-width) - (3 * var(--d-margin)));
+  height: 100%;
+  .dash-nav {
+    @extend %main;
+    height: calc(var(--nav-height) - (2 * var(--d-margin)));
+  }
+
+  .dash-info {
+    @extend %main;
+    height: calc(100% - var(--nav-height) - var(--d-margin));
+    overflow: auto;
+  }
+}
+
+
