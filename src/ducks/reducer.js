@@ -102,6 +102,7 @@ export function loadEditTarget(targetObject){
 }
 
 export default function reducer(state=initialState , action){
+  // console.log(action.type, action.payload)
   switch(action.type){
     case LOGIN_AGENT :
       return {...state , agent: action.payload}

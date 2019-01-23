@@ -8,9 +8,9 @@ import Info from '../Info/Info';
 import Edit from '../Edit/Edit';
 import { Switch , Route } from 'react-router-dom'
 import { loadInteractions , loadCustomers, loadFlags, loadTasks , loadTickets , loginAgent } from '../../ducks/reducer'
-import isLoggedIn from '../../lib/isLoggedIn'
+// import isLoggedIn from '../../lib/isLoggedIn'
 import axios from 'axios';
-import testSVG from '../../svg/svgTest.svg'
+// import testSVG from '../../svg/svgTest.svg'
 
 class Dashboard extends Component{
   constructor(props){
@@ -29,7 +29,7 @@ class Dashboard extends Component{
       this.props.loginAgent(user.data)  // Line should be removed, passthrough
       const res = await axios.get('/load/' + terms[i])
       loader(res.data)
-      console.log(terms[i]+'s loaded ' , res.data)
+      // console.log(terms[i]+'s loaded ' , res.data)
       } catch (err) {return console.log(err)}
     })
     console.log(this.props)

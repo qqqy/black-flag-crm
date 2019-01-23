@@ -1,0 +1,10 @@
+@import '../../scss/card';
+@import '../../scss/flag';
+
+.info-main {
+  display: flex;
+}
+
+.card {
+  @extend %card
+}
