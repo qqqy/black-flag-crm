@@ -56,6 +56,7 @@ app.get('/search/:term' , sCtrl.searchTerm)
 app.patch('/save/interaction' , uCtrl.saveInteraction)
 app.put('/new/interaction' , uCtrl.newInteraction)
 app.put('/new/ticket' , uCtrl.newTicket)
+app.put('/new/customer' , uCtrl.newCustomer)
 
 app.delete('/delete/:table/:column/:id' , uCtrl.delete)
 

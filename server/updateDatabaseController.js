@@ -22,8 +22,17 @@ module.exports = {
   async newTicket (req , res) {
     const db = req.app.get('db')
     try{
-      let interaction = await db.new_ticket(req.body)
-      res.status(201).send(interaction[0])
+      let ticket = await db.new_ticket(req.body)
+      res.status(201).send(ticket[0])
+    } catch (error){
+      res.status(200).send(error.message)
+    } 
+  } ,
+  async newCustomer (req , res) {
+    const db = req.app.get('db')
+    try{
+      let customer = await db.new_customer(req.body)
+      res.status(201).send(customer[0])
     } catch (error){
       res.status(200).send(error.message)
     } 

@@ -1,0 +1,8 @@
+.dropdown {
+  width: 60%;
+  opacity: .7;
+  transition: opacity .1s;
+  &:hover {
+    opacity: 1;
+  }
+}

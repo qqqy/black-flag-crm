@@ -4,12 +4,12 @@
   width: 90%;
   height: 80px;
   background-color: var(--bright);
-  border-radius: 5px;
+  // border-radius: 5px;
   margin-bottom: 3px;
   box-shadow: var(--shadow);
   padding: 5px;
   display: flex;
-  opacity: .95;
+  opacity: .80;
   transition: opacity .1s , left .1s;
   &:hover {
     opacity: 1;

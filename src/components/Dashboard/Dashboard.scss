@@ -4,14 +4,53 @@
   --inte-width: 650px;
   --nav-height: 200px;
   --d-margin: 10px;
-  --dark: rgb(25 , 37 , 59);
-  --mid: rgb(60 , 82 , 129);
-  --light: rgb(153, 204, 255);
-  --bright: rgb(202, 253, 254);
+  --dark: black;
+  --mid: whitesmoke;
+  --light: white;
+  --bright: white;
   --accent: rgb(100, 34, 20);
   --shadow: 2px 2px 2px var(--dark);
 
   font-family: 'Arimo';
+  text-decoration: none;
+}
+
+%active {
+  color: black;
+  box-shadow: 1px 1px 1px #000000d4;
+}
+
+button {
+  outline: none;
+  border: none;
+  background-color: whitesmoke;
+  height: 30px;
+  margin: 5px 10px;
+  color: #000000d4;
+  transition: color , box-shadow .1s;
+  border-radius: 9px;
+  &:hover {
+    @extend %active;
+  }
+  &:active {
+    @extend %active;
+  }
+  &.large {
+    height: 50px;
+    width: 60px;
+  }
+}
+
+select {
+  height: 30px;
+  margin: 10px;
+  width: 100%;
+}
+
+input {
+  height: 30px;
+  margin: 10px;
+  width: 100%;
 }
 
 .dash-main {
@@ -24,7 +63,7 @@
 %main {
   background: var(--light);
   margin: var(--d-margin);
-  border-radius: 5px;
+  // border-radius: 5px;
   box-shadow: var(--shadow);
 }
 
