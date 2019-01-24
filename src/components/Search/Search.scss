@@ -10,3 +10,13 @@
     @extend %card;
   }
 }
+
+.search-bar {
+  @extend %card;
+  opacity: 1;
+  height: 40px;
+  align-items: center;
+  &:hover {
+    left: 0px;
+  }
+}

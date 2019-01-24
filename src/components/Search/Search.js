@@ -36,26 +36,28 @@ class Search extends Component {
   }
 
   render() {
-    const results = this.props.display.map(
-      (result, i) => {
-        const flag = this.props.flags.length > 0 ? <Flag id={result.inte_flag} /> : ''
-        return (
-          <div className='card search-result' key={i}>
-            {flag}
-            <div className="card-info">
-              <div onClick={() => this.props.history.push(`/info/customer/${result.cust_id}`)}>Client: {result.cust_name}</div>
-              <div onClick={() => this.props.history.push(`/info/ticket/${result.tick_id}`)}>Ticket: {result.tick_id}</div>
-              <div onClick={() => this.props.history.push(`/info/agent/${result.agent_id}`)}>Agent: {result.agent_name}</div>
-            </div>
-            <div className="card-content" onClick={() => this.props.history.push(`/info/interaction/${result.inte_id}`)}>
-              <p className="title">{result.inte_title.toUpperCase()}</p>
-              <p>{parseDate(result.inte_date)}</p>
-              <p>{result.inte_body}</p>
-            </div>
+  const results = this.props.display ? this.props.display.map(
+    (result, i) => {
+      const flag = this.props.flags.length > 0 ? <Flag id={result.inte_flag} /> : ''
+      return (
+        <div className='card search-result' key={i}>
+          {flag}
+          <div className="card-info">
+            <div onClick={() => this.props.history.push(`/info/customer/${result.cust_id}`)}>Client: {result.cust_name}</div>
+            <div onClick={() => this.props.history.push(`/info/ticket/${result.tick_id}`)}>Ticket: {result.tick_id}</div>
+            <div onClick={() => this.props.history.push(`/info/agent/${result.agent_id}`)}>Agent: {result.agent_name}</div>
           </div>
-        )
-      }
-    )
+          <div className="card-content" onClick={() => this.props.history.push(`/info/interaction/${result.inte_id}`)}>
+            <p className="title">{result.inte_title.toUpperCase()}</p>
+            <p>{parseDate(result.inte_date)}</p>
+            <p>{result.inte_body}</p>
+          </div>
+        </div>
+      )
+    }
+  ) 
+  : 
+  <div> Loading... </div>
     return (
       <div className="search-main">
         <div className="search-bar">
@@ -67,8 +69,8 @@ class Search extends Component {
             onClick={this.search}
           >Search</button>
         </div>
-        <input type="checkbox" onChange={() => this.setState({ customerSort: !this.state.customerSort })} />
-        <span>Sort by Customer</span>
+        {/* <input type="checkbox" onChange={() => this.setState({ customerSort: !this.state.customerSort })} />
+        <span>Sort by Customer</span> */}
         {results}
       </div>
     )

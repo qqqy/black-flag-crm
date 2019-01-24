@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Info.scss'
-import { Link, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { targetCustomer, targetTicket, targetInteraction, loadDisplay, loadEditTarget } from '../../ducks/reducer'
 import axios from 'axios'
@@ -11,7 +11,7 @@ class Info extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loading: true ,
+      loading: true,
     }
 
     this.ticketView = this.ticketView.bind(this)
@@ -30,7 +30,26 @@ class Info extends Component {
       this.loadUp()
       // console.log(oldId , newId)
     }
+    // This probably doesn't need to come back, but I liked it, so I'm keeping it. //
+    // if(+newId !== this.props[this.indexType().target][this.indexType().id] && this.props[this.indexType().target][this.indexType().id]){
+    //   console.log(+newId , this.props[this.indexType().target][this.indexType().id])
+    //   this.props.history.push('/info/customer/' + this.props[this.indexType().target][this.indexType().id])
+    // }
   }
+
+  // indexType = () => {
+  //   switch (this.props.match.params.type){
+  //     case 'customer' :
+  //       return {target: 'targetCustomerInfo' , id: 'cust_id' , function: 'targetCustomer'};
+  //     case 'ticket' :
+  //       return {target: 'targetTicketInfo' , id: 'tick_id' , function: 'targetTicket'};
+  //     case 'agent' :
+  //       return {target: 'targetAgentInfo' , id: 'agent_id' , function: 'targetAgent'};
+  //     case 'interaction' :
+  //       return {target: 'targetInteractionInfo' , id: 'inte_id' , function: 'targetInteraction'}
+  //     default : alert('Type not recognized! info, indexType'); return null;
+  //   }
+  // }
 
   async loadUp() {
     console.log(this.props)
@@ -53,21 +72,21 @@ class Info extends Component {
       let newRes = await axios.get(`/target/${type}?id=${id}`)
       this.props[functionName](newRes.data)
     } catch (err) {
-      alert("info 53" , err.message)
+      alert("info 53", err.message)
       this.props.history.goBack()
     }
-    if(this.props.display.length > 0){this.setState({loading: false})}
+    if (this.props.display.length > 0) { this.setState({ loading: false }) }
   }
 
   customerView() {
-    let list = this.props.display.map((inte, i) => {
+    let list = this.props.display? this.props.display.map((inte, i) => {
       return (
-        <div className="card" key={i}>
+        <div className="card" key={i} onClick={() => this.props.history.push(`/edit/interaction/${inte.inte_flag}`)}>
           <Flag id={inte.inte_flag} />
-          <div className="card-info">
+          {/* <div className="card-info">
             <div onClick={() => this.props.history.push(`/edit/interaction/${inte.inte_flag}`)}>Edit Interaction</div>
             {/* <div onClick={() => this.props.history.push(`/info/agent/${inte.inte_agent}`)}>View</div> */}
-          </div>
+          {/* </div> */}
           <div className="card-content">
             <p className="title">{inte.inte_title}</p>
             <p>{parseDate(inte.inte_date)}</p>
@@ -76,13 +95,21 @@ class Info extends Component {
         </div>
       )
     })
+    :
+    <div>No Connection To Server!</div>
     const { cust_name, cust_email, cust_phone } = this.props.targetCustomerInfo
     return (
       <>
-        <div>
-          {cust_name} , {cust_email} , {cust_phone}
+        <div className="info-bar">
+          <div className="card-content">
+            <p className="title"> {cust_name}</p>
+          </div>
+          <div className="card-info">
+            <div>{cust_email}</div>
+            <div>{cust_phone}</div>
+          </div>
         </div>
-        <div>
+        <div className="deck">
           {list}
         </div>
       </>
@@ -128,10 +155,10 @@ class Info extends Component {
   }
 
   render() {
-    if(this.state.loading){return (<div>Loading...</div>)}
+    if (this.state.loading) { return (<div>Loading...</div>) }
     return (
       <div className="info-main">
-      <Switch>
+        <Switch>
           <Route path='/info/customer/:id' render={this.customerView} />
           <Route path='/info/ticket/:id' render={this.ticketView} />
           <Route path='/info/interaction/:id' render={this.interactionView} />
@@ -142,13 +169,13 @@ class Info extends Component {
 }
 
 function mapStateToProps(state) {
-  const { display, targetCustomerInfo, targetTicketInfo, targetInteractionInfo , flags } = state
+  const { display, targetCustomerInfo, targetTicketInfo, targetInteractionInfo, flags } = state
   return {
     display,
     targetCustomerInfo,
     targetTicketInfo,
-    targetInteractionInfo ,
-    flags ,
+    targetInteractionInfo,
+    flags,
   }
 }
 

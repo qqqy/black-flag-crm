@@ -3,8 +3,31 @@
 
 .info-main {
   display: flex;
+  padding: 10px;
+  width: 100%;
+  min-height: 200px;
+  align-items: stretch;
 }
 
 .card {
-  @extend %card
+  @extend %card;
+  width: 100%;
+}
+
+.info-bar {
+  @extend %card;
+  flex-direction: column;
+  max-width: 160px;
+  width: 30%;
+  height: inherit;
+  margin-right: 10px;
+  min-height: 80px;
+}
+
+.info-bar:hover {
+  left: 0px;
+}
+
+.deck {
+  width: 100%;
 }
