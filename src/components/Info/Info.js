@@ -52,8 +52,13 @@ class Info extends Component {
   // }
 
   async loadUp() {
-    console.log(this.props)
+    // console.log(this.props)
     const { id, type } = this.props.match.params
+    // if(!type || !id){
+    //   alert("URL Invalid, returning to search view...")
+    //   this.props.history.goBack()
+    //   return null
+    // }
     let functionName = findFunction()
     function findFunction() {
       switch (type) {
@@ -68,18 +73,24 @@ class Info extends Component {
     }
     try {
       let res = await axios.get(`/subload/${type}?id=${id}`)
-      this.props.loadDisplay(res.data)
+      if (typeof res.data.map === "function"){
+        this.props.loadDisplay(res.data)
+      } else {
+        console.log(`Format Incorrect! Expected array, recieved "${res.data}"`)
+        this.props.history.goBack()
+      }
       let newRes = await axios.get(`/target/${type}?id=${id}`)
       this.props[functionName](newRes.data)
     } catch (err) {
-      alert("info 53", err.message)
-      this.props.history.goBack()
+      console.log('Error in Info loadUp: ' , err.message)
+      // alert("info 53", err.message)
+      // this.props.history.goBack()
     }
     if (this.props.display.length > 0) { this.setState({ loading: false }) }
   }
 
   customerView() {
-    let list = this.props.display? this.props.display.map((inte, i) => {
+    let list = typeof this.props.display === "object" ? this.props.display.map((inte, i) => {
       return (
         <div className="card" key={i} onClick={() => this.props.history.push(`/edit/interaction/${inte.inte_flag}`)}>
           <Flag id={inte.inte_flag} />
@@ -96,7 +107,8 @@ class Info extends Component {
       )
     })
     :
-    <div>No Connection To Server!</div>
+    <>{this.props.history.goBack()}</>
+
     const { cust_name, cust_email, cust_phone } = this.props.targetCustomerInfo
     return (
       <>
@@ -137,7 +149,7 @@ class Info extends Component {
     const { inte_id, inte_title, inte_ticket, inte_body, inte_flag, inte_date } = this.props.targetInteractionInfo
     return (
       <div className="interaction-view-main">
-        <div className="int-view-box override">
+        <div className="card override">
           <div className="flag">
             <Flag id={inte_flag}/>
           </div>
@@ -147,7 +159,7 @@ class Info extends Component {
             <button className="large edit-btn" onClick={() => this.edit(this.props.targetInteractionInfo)}>EDIT</button>
           </div>
         </div>
-        <div className="int-view-box body override">
+        <div className="card body override">
         {/* REMOVE FOLLOWING WHEN FINISHED TROUBLESHOOTING */}
         <div className="card-info">
           <p>

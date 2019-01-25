@@ -32,7 +32,7 @@ class Dashboard extends Component{
       // console.log(terms[i]+'s loaded ' , res.data)
       } catch (err) {return console.log(err)}
     })
-    console.log(this.props)
+    // console.log(this.props)
   }
 
   logout(){

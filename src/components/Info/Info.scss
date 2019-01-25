@@ -15,7 +15,7 @@
   border-width: 2px 0px 0px 2px;
 }
 
-.int-view-box {
+.card {
   @extend %card;
   width: 100%;
   & .edit-btn {

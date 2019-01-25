@@ -69,19 +69,19 @@ class Edit extends Component {
         <div className="edit-left">
           <div className="edit-cust-droplist">
             <div className="edit-space">
-            <label for="flag">Change Flag</label>
+            <label htmlFor="flag">Change Flag</label>
             </div>
             <select className="dropdown" name="flag" value={this.state.target.inte_flag} onChange={(e) => this.setState({ target: { ...this.state.target, inte_flag: e.target.value } })}>
               {flagOptions}
             </select>
             <div className="edit-space">
-              <label for="agent">Assign Agent</label>
+              <label htmlFor="agent">Assign Agent</label>
             </div>
             <select className="dropdown" name="agent" value={this.state.target.inte_agent} onChange={(e) => this.setState({ target: { ...this.state.target, inte_agent: e.target.value } })}>
               {agentOptions}
             </select>
             <div className="edit-space">
-              <label for="ticket">Assign Ticket</label>
+              <label htmlFor="ticket">Assign Ticket</label>
             </div>
             <select className="dropdown" name="ticket" value={this.state.target.inte_ticket} onChange={(e) => this.setState({ target: { ...this.state.target, inte_ticket: e.target.value } })}>
               {ticketOptions}
@@ -90,11 +90,11 @@ class Edit extends Component {
         </div>
         <div className="edit-body">
           <div className="edit-space">
-            <label for="title">Title</label>
+            <label htmlFor="title">Title</label>
           </div>
           <p className="edit-space"><input className="edit-title-input" name="title" label="inte_title" defaultValue={this.props.editTarget.inte_title} onChange={(e) => this.setState({ target: { ...this.state.target, inte_title: e.target.value } })} /> </p>
           <div className="edit-space">
-            <label for="body">Body</label>
+            <label htmlFor="body">Body</label>
           </div>
           <textarea name="body" label="inte_body" value={this.state.target.inte_body} onChange={(e) => this.setState({ target: { ...this.state.target, inte_body: e.target.value } })} />
           <button onClick={this.saveEdit}>Save Changes</button>
@@ -137,7 +137,7 @@ class Edit extends Component {
       await axios.delete(`/delete/${type}/${column}/${id}`)
       alert(`"${this.props.editTarget[name]}" Deleted!`)
       this.props.loadEditTarget({})
-      this.props.history.push(pushString)
+      this.props.history.push('/')
     } catch (error) {
       alert("Unable to Delete! Reason:" + error)
     }
@@ -146,9 +146,11 @@ class Edit extends Component {
   discard = () => {
     const { type, id } = this.props.match.params
     this.props.history.push(`/info/${type}/${id}`)
+    // console.log(type , id)
   }
 
   render() {
+    // console.log(this.props)
     let loading = (<div>Loading...</div>)
     return (
       <div className="edit-main">
