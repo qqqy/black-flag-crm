@@ -23,6 +23,7 @@ app.use(session({
   resave: false ,
   saveUninitialized: false
 }))
+app.use( express.static( `${__dirname}/../build` ) );
 
 // TEST ENDPOINTS //
 
