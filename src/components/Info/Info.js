@@ -144,7 +144,7 @@ class Info extends Component {
           <div className="card-content">
             <p className="title" >{inte_title}</p>
             <p>{parseDate(inte_date)}</p>
-            <button className="large edit-btn" onClick={() => this.edit(this.props.targetInteractionInfo)}>edit</button>
+            <button className="large edit-btn" onClick={() => this.edit(this.props.targetInteractionInfo)}>EDIT</button>
           </div>
         </div>
         <div className="int-view-box body override">
