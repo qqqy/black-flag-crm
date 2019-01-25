@@ -4,8 +4,8 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import Begin from './Begin/Begin';
 import Finalize from './Finalize/Finalize';
-import { targetCustomer, targetTicket } from '../../ducks/reducer'
-import { Link } from 'react-router-dom'
+import { targetCustomer, targetTicket , loadDisplay } from '../../ducks/reducer'
+import { Link , withRouter } from 'react-router-dom'
 
 class Interaction extends Component {
   constructor(props) {
@@ -119,17 +119,31 @@ class Interaction extends Component {
       // console.log("Should be First")
     }
     try {
-      let res = axios.put('/new/interaction', this.state.newInteraction)
+      let res = await axios.put('/new/interaction', this.state.newInteraction)
+      if(this.props.match.path === "/"){
+        console.log("Updating Search with" , res.data)
+        const newDisplay = this.props.display.slice()
+        newDisplay.unshift(res.data)
+        this.props.loadDisplay(newDisplay)
+      }
       // console.log("Should be second")
       // Try using withRouter here sometime.
       // this.props.history.push(`/info/interaction/${res.data.inte_id}`)
       this.next()
     } catch (error) {
-      console.log(error.message)
+      return console.log(error.message)
     }
+    alert('Interaction Successfully Created!')
+    // const regex = RegExp(/search/)
+    // if(regex.test(this.props.location.pathname)){
+    //   console.log('Updating Search Results')
+    //   let res = await axios.get('/load/display')
+    //   this.props.loadDisplay(res.data)
+    // }
   }
 
   render() {
+    console.log(this.props)
     return (
       <>
         <Link to="/">
@@ -152,13 +166,14 @@ class Interaction extends Component {
 }
 
 function mapStateToProps(state) {
-  const { agent, customers, targetCustomerInfo, targetTicketInfo } = state
+  const { agent, customers, targetCustomerInfo, targetTicketInfo , display } = state
   return {
     agent,
     customers,
     targetCustomerInfo,
-    targetTicketInfo
+    targetTicketInfo,
+    display,
   }
 }
 
-export default connect(mapStateToProps, { targetCustomer, targetTicket })(Interaction)
+export default withRouter(connect(mapStateToProps, { targetCustomer, targetTicket , loadDisplay })(Interaction))

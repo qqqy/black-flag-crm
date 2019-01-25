@@ -134,17 +134,32 @@ class Info extends Component {
   }
 
   interactionView() {
-    const { inte_id, inte_title, inte_ticket, inte_body } = this.props.targetInteractionInfo
+    const { inte_id, inte_title, inte_ticket, inte_body, inte_flag, inte_date } = this.props.targetInteractionInfo
     return (
-      <>
-        <div>
-          {inte_id} , {inte_title} , {inte_ticket}
+      <div className="interaction-view-main">
+        <div className="int-view-box override">
+          <div className="flag">
+            <Flag id={inte_flag}/>
+          </div>
+          <div className="card-content">
+            <p className="title" >{inte_title}</p>
+            <p>{parseDate(inte_date)}</p>
+            <button className="large edit-btn" onClick={() => this.edit(this.props.targetInteractionInfo)}>edit</button>
+          </div>
         </div>
-        <div>
-          <p>{inte_body}</p>
+        <div className="int-view-box body override">
+        {/* REMOVE FOLLOWING WHEN FINISHED TROUBLESHOOTING */}
+        <div className="card-info">
+          <p>
+          INTE_ID: {inte_id} <br/>
+          INTE_TICKET: {inte_ticket}
+          </p>
         </div>
-        <button onClick={() => this.edit(this.props.targetInteractionInfo)}>edit</button>
-      </>
+          <p>
+            {inte_body}
+          </p>
+        </div>
+      </div>
     )
   }
 

@@ -9,9 +9,36 @@
   align-items: stretch;
 }
 
-.card {
+.interaction-view-main {
+  width: 100%;
+  border: solid whitesmoke;
+  border-width: 2px 0px 0px 2px;
+}
+
+.int-view-box {
   @extend %card;
   width: 100%;
+  & .edit-btn {
+    position: absolute;
+    right: 0;
+    top: 8px;
+  }
+  &.body {
+    display: block;
+    height: auto;
+    position: relative;
+    top: -2px;
+    min-height: 430px;
+    padding: 10px 20px;
+  }
+
+}
+
+.override {
+  opacity: 1;
+  &:hover {
+  left: 0px;
+  }
 }
 
 .info-bar {
