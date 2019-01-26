@@ -59,7 +59,7 @@ class Info extends Component {
     //   this.props.history.goBack()
     //   return null
     // }
-    let functionName = findFunction()
+    let functionName = findFunction() 
     function findFunction() {
       switch (type) {
         case 'customer':
@@ -92,7 +92,7 @@ class Info extends Component {
   customerView() {
     let list = typeof this.props.display === "object" ? this.props.display.map((inte, i) => {
       return (
-        <div className="card" key={i} onClick={() => this.props.history.push(`/edit/interaction/${inte.inte_flag}`)}>
+        <div className="card" key={i} onClick={() => this.props.history.push(`/edit/interaction/${inte.inte_id}`)}>
           <Flag id={inte.inte_flag} />
           {/* <div className="card-info">
             <div onClick={() => this.props.history.push(`/edit/interaction/${inte.inte_flag}`)}>Edit Interaction</div>
@@ -128,21 +128,56 @@ class Info extends Component {
     )
   }
 
-  ticketView() {
+  // ticketView() {
+  //   let list = this.props.display.map((inte, i) => {
+  //     return (<div key={i}>{inte.inte_flag} , {inte.inte_title} , {inte.inte_date} , {inte.inte_agent}</div>)
+  //   })
+  //   const { tick_id, tick_customer, tick_agent, tick_resolved } = this.props.targetTicketInfo
+  //   return (
+  //     <>
+  //       <div>
+  //         {tick_id} , {tick_customer} , {tick_agent} , {tick_resolved}
+  //       </div>
+  //       <div>
+  //         {list}
+  //       </div>
+  //     </>
+  //   )
+  // }
+
+  ticketView = () => {
     let list = this.props.display.map((inte, i) => {
-      return (<div key={i}>{inte.inte_flag} , {inte.inte_title} , {inte.inte_date} , {inte.inte_agent}</div>)
+      return (
+        <div className="card" key={i} onClick={() => this.props.history.push(`/edit/interaction/${inte.inte_id}`)}>
+          <Flag id={inte.inte_flag} />
+          <div className="card-content">
+            <p className="title">{inte.inte_title}</p>
+            <p>{parseDate(inte.inte_date)}</p>
+            <p>{inte.inte_body}</p>
+          </div>
+        </div>
+      )
     })
-    const { tick_id, tick_customer, tick_agent, tick_resolved } = this.props.targetTicketInfo
+
+    const { tick_title , cust_name , tick_id , agent_name } = this.props.targetTicketInfo
     return (
       <>
-        <div>
-          {tick_id} , {tick_customer} , {tick_agent} , {tick_resolved}
+        <div className="info-bar">
+          <div className="card-content">
+            <p className="title"> {tick_title}</p>
+          </div>
+          <div className="card-info">
+            <div>Client: {cust_name}</div>
+            <div>Ticket: {tick_id}</div>
+            <div>Agent: {agent_name}</div>
+          </div>
         </div>
-        <div>
+        <div className="deck">
           {list}
         </div>
       </>
     )
+  
   }
 
   interactionView() {

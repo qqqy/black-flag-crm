@@ -1,5 +1,5 @@
 import React from 'react'
-import './Finalize.css'
+import './Finalize.scss'
 import { connect } from 'react-redux'
 
 function Finalize(props) {
@@ -8,7 +8,7 @@ function Finalize(props) {
   )})
   return(
     <>
-    <textarea onChange={(e) => props.update('inte_body' , e.target.value)}/>
+    <textarea id="new-int-body" onChange={(e) => props.update('inte_body' , e.target.value)}/>
     <select>
       {flagOptions}
     </select>
