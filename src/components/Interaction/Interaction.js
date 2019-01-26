@@ -48,7 +48,8 @@ class Interaction extends Component {
   }
 
   update = (column, newVal , type = 'newInteraction') => {
-    if (this.state.newInteraction.inte_ticket == 0 && column === 'inte_title') { this.setState({ newTicket: { ...this.state.newTicket, tick_title: newVal } }) }
+    console.log(newVal)
+    if (+this.state.newInteraction.inte_ticket === 0 && column === 'inte_title') { this.setState({ newTicket: { ...this.state.newTicket, tick_title: newVal } }) }
     this.setState({ [type]: { ...this.state[type], [column]: newVal } })
   }
 
@@ -82,7 +83,7 @@ class Interaction extends Component {
       case 'Begin':
         return (<Begin update={this.update} customers={this.props.customers} targetCustomer={this.targetCustomer} targetTicket={this.targetTicket} next={this.next} />)
       case 'Finalize':
-        return (<Finalize update={this.update} new={this.new} />)
+        return (<Finalize update={this.update} new={this.new} discard={this.discard} />)
       default:
         return (<>Something went wrong! Please refresh.</>)
     }
@@ -97,6 +98,32 @@ class Interaction extends Component {
       default:
         return this.setState({ view: 'Begin' })
     }
+  }
+
+  discard = () => {
+    this.setState({
+      newInteraction: {
+        inte_flag: 1,
+        inte_ticket: 0,
+        inte_task: null,
+        inte_agent: this.props.agent.agent_id,
+        inte_body: '',
+        inte_title: '',
+      },
+      newTicket: {
+        tick_agent: this.props.agent.agent_id,
+        tick_customer: this.props.targetCustomerInfo.cust_id,
+        tick_title: '',
+        tick_reference: null,
+      },
+      newCustomer: {
+        cust_name: '' ,
+        cust_email: '' ,
+        cust_phone: null,
+        cust_ip: null,
+      }
+    })
+    this.next()
   }
 
   new = async () => {
@@ -152,12 +179,12 @@ class Interaction extends Component {
             >BlackFlag</h1>
         </Link>
       <div className="inte-main">
-      {/* <div>
+      <div>
         <button 
           onClick={() => console.log('inte: ' , this.state.newInteraction, 'tick: ' , this.state.newTicket, 'cust: ' , this.state.newCustomer)}
           >DEBUG See Interaction
         </button>
-          </div> */}
+          </div>
         {this.view()}
       </div>
         </>
