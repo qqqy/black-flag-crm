@@ -16,7 +16,7 @@ module.exports = {
       let interaction = await db.new_interaction(req.body)
       res.status(201).send(interaction[0])
     } catch (error){
-      res.status(200).send(error.message)
+      res.status(400).send(error.message)
     } 
   } ,
   async newTicket (req , res) {
@@ -25,7 +25,7 @@ module.exports = {
       let ticket = await db.new_ticket(req.body)
       res.status(201).send(ticket[0])
     } catch (error){
-      res.status(200).send(error.message)
+      res.status(400).send(error.message)
     } 
   } ,
   async newCustomer (req , res) {
@@ -34,7 +34,7 @@ module.exports = {
       let customer = await db.new_customer(req.body)
       res.status(201).send(customer[0])
     } catch (error){
-      res.status(200).send(error.message)
+      res.status(400).send(error.message)
     } 
   } ,
 

@@ -48,7 +48,6 @@ class Interaction extends Component {
   }
 
   update = (column, newVal , type = 'newInteraction') => {
-    console.log(newVal)
     if (+this.state.newInteraction.inte_ticket === 0 && column === 'inte_title') { this.setState({ newTicket: { ...this.state.newTicket, tick_title: newVal } }) }
     this.setState({ [type]: { ...this.state[type], [column]: newVal } })
   }
@@ -147,18 +146,23 @@ class Interaction extends Component {
     }
     try {
       let res = await axios.put('/new/interaction', this.state.newInteraction)
-      if(this.props.match.path === "/"){
-        console.log("Updating Search with" , res.data)
-        const newDisplay = this.props.display.slice()
-        newDisplay.unshift(res.data)
-        this.props.loadDisplay(newDisplay)
-      }
       // console.log("Should be second")
       // Try using withRouter here sometime.
       // this.props.history.push(`/info/interaction/${res.data.inte_id}`)
       this.next()
     } catch (error) {
       return console.log(error.message)
+    }
+    if(this.props.match.path === "/"){
+    try {
+      let res = await axios.get('/load/display')
+      // console.log("Updating Search with" , res.data)
+      // const newDisplay = this.props.display.slice()
+      // newDisplay.unshift(res.data)
+      this.props.loadDisplay(res.data)
+      } catch (error) {
+        alert(error.message)
+      }
     }
     alert('Interaction Successfully Created!')
     // const regex = RegExp(/search/)
@@ -179,12 +183,12 @@ class Interaction extends Component {
             >BlackFlag</h1>
         </Link>
       <div className="inte-main">
-      <div>
+      {/* <div>
         <button 
           onClick={() => console.log('inte: ' , this.state.newInteraction, 'tick: ' , this.state.newTicket, 'cust: ' , this.state.newCustomer)}
           >DEBUG See Interaction
         </button>
-          </div>
+          </div> */}
         {this.view()}
       </div>
         </>
