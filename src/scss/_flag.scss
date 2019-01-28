@@ -1,8 +1,18 @@
 .flag {
+  position: relative;
   height: 70px;
   width: 70px;
   border-radius: 50%;
   // background-color: red;
   flex-shrink: 0;
   padding: 10px
+}
+
+#symbol {
+  position: absolute;
+  left: 0px;
+  top: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 65px;
 }
