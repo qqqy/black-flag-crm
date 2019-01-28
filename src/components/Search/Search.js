@@ -40,7 +40,7 @@ class Search extends Component {
     (result, i) => {
       const flag = this.props.flags.length > 0 ? <Flag id={result.inte_flag} /> : ''
       return (
-        <div className='card search-result' key={i}>
+        <div className='card search-result left-def' key={i}>
           {flag}
           <div className="card-info">
             <div onClick={() => this.props.history.push(`/info/customer/${result.cust_id}`)}>Client: {result.cust_name}</div>
@@ -60,7 +60,7 @@ class Search extends Component {
   <div> Loading... </div>
     return (
       <div className="search-main">
-        <div className="search-bar">
+        <div className="search-bar left-def top">
           <input
             onChange={(e) => this.setState({ searchTerm: e.target.value })}
             value={this.state.searchTerm}

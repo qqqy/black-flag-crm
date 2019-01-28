@@ -92,4 +92,10 @@ textarea {
   }
 }
 
-
+.left-def {
+  border: solid whitesmoke;
+  border-width: 0px 0px 0px 2px;
+  &.top {
+    border-width: 2px 0px 0px 2px;
+  }
+}

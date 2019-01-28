@@ -92,7 +92,7 @@ class Info extends Component {
   customerView() {
     let list = typeof this.props.display === "object" ? this.props.display.map((inte, i) => {
       return (
-        <div className="card" key={i} onClick={() => this.props.history.push(`/edit/interaction/${inte.inte_id}`)}>
+        <div className={i === 0 ? "card left-def top" : "card left-def"} key={i} onClick={() => this.props.history.push(`/info/interaction/${inte.inte_id}`)}>
           <Flag id={inte.inte_flag} />
           {/* <div className="card-info">
             <div onClick={() => this.props.history.push(`/edit/interaction/${inte.inte_flag}`)}>Edit Interaction</div>
@@ -112,7 +112,7 @@ class Info extends Component {
     const { cust_name, cust_email, cust_phone } = this.props.targetCustomerInfo
     return (
       <>
-        <div className="info-bar">
+        <div className="info-bar left-def top">
           <div className="card-content">
             <p className="title"> {cust_name}</p>
           </div>
@@ -148,7 +148,7 @@ class Info extends Component {
   ticketView = () => {
     let list = this.props.display.map((inte, i) => {
       return (
-        <div className="card" key={i} onClick={() => this.props.history.push(`/edit/interaction/${inte.inte_id}`)}>
+        <div className={i === 0 ? "card left-def top" : "card left-def"} key={i} onClick={() => this.props.history.push(`/info/interaction/${inte.inte_id}`)}>
           <Flag id={inte.inte_flag} />
           <div className="card-content">
             <p className="title">{inte.inte_title}</p>
@@ -162,7 +162,7 @@ class Info extends Component {
     const { tick_title , cust_name , tick_id , agent_name } = this.props.targetTicketInfo
     return (
       <>
-        <div className="info-bar">
+        <div className="info-bar left-def top">
           <div className="card-content">
             <p className="title"> {tick_title}</p>
           </div>
@@ -185,23 +185,16 @@ class Info extends Component {
     return (
       <div className="interaction-view-main">
         <div className="card override">
-          <div className="flag">
             <Flag id={inte_flag}/>
-          </div>
           <div className="card-content">
             <p className="title" >{inte_title}</p>
             <p>{parseDate(inte_date)}</p>
+            <p>Ticket: {inte_ticket}</p>
             <button className="large edit-btn" onClick={() => this.edit(this.props.targetInteractionInfo)}>EDIT</button>
           </div>
         </div>
         <div className="card body override">
         {/* REMOVE FOLLOWING WHEN FINISHED TROUBLESHOOTING */}
-        <div className="card-info">
-          <p>
-          INTE_ID: {inte_id} <br/>
-          INTE_TICKET: {inte_ticket}
-          </p>
-        </div>
           <p>
             {inte_body}
           </p>
