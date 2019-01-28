@@ -8,7 +8,7 @@ import Info from '../Info/Info';
 import Edit from '../Edit/Edit';
 import { Switch , Route } from 'react-router-dom'
 import { loadInteractions , loadCustomers, loadFlags, loadTasks , loadTickets , loginAgent } from '../../ducks/reducer'
-// import isLoggedIn from '../../lib/isLoggedIn'
+// import check from '../../lib/isLoggedIn'
 import axios from 'axios';
 // import testSVG from '../../svg/svgTest.svg'
 
@@ -19,8 +19,8 @@ class Dashboard extends Component{
     this.logout = this.logout.bind(this)
   }
 
-  componentDidMount(){
-    // isLoggedIn(this.props)
+  async componentDidMount(){
+    // check(this.props)
     const loaderArray = [this.props.loadInteractions , this.props.loadCustomers , this.props.loadFlags , this.props.loadTasks , this.props.loadTickets]
     const terms = ['interaction' , 'customer' , 'flag' , 'task' , 'ticket' ]
     loaderArray.forEach(async (loader , i) => {

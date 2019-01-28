@@ -32,7 +32,7 @@ app.get('/test/db' , async (req, res) => {
   let customers = await db.testdb().catch(err => res.status(200).send(err))
   res.status(200).send(customers)
 })
-app.get('/test/server' , (req, res) => res.sendStatus(200))
+app.get('/test/server' , (req, res) => res.status(401).send({code: 401 , message: 'User Not Logged In'}))
 app.get('/test/session' , (req, res) => res.status(200).send(req.session))
 app.get('/test/bcrypt/:fake' , aCtrl.test)
 app.post('/test/builder' , sCtrl.testQueryBuilder)

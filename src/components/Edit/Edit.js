@@ -3,6 +3,7 @@ import './Edit.scss';
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { loadEditTarget, targetInteraction } from '../../ducks/reducer'
+import check from '../../lib/isLoggedIn'
 
 class Edit extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Edit extends Component {
   }
 
   async componentDidMount() {
+    check(this.props)
     // a filter needs to be added here to determine which layout we're using //
     this.setState({ lists: 3 })
     await this.loadOptions('flag_id , flag_name', 'flag')

@@ -5,6 +5,7 @@ import { loadDisplay } from '../../ducks/reducer'
 import axios from 'axios'
 import Flag from '../Flag/Flag';
 import parseDate from '../../lib/parseDate'
+import check from '../../lib/isLoggedIn'
 
 class Search extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Search extends Component {
   }
 
   componentDidMount() {
+    check(this.props)
     axios.get('/load/display')
       .then((res) => {
         this.props.loadDisplay(res.data)

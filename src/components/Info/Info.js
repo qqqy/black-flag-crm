@@ -6,6 +6,7 @@ import { targetCustomer, targetTicket, targetInteraction, loadDisplay, loadEditT
 import axios from 'axios'
 import Flag from '../Flag/Flag';
 import parseDate from '../../lib/parseDate'
+import check from '../../lib/isLoggedIn'
 
 class Info extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Info extends Component {
   }
 
   componentDidMount() {
+    check(this.props)
     this.loadUp()
   }
 

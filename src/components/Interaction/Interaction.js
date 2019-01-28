@@ -6,6 +6,7 @@ import Begin from './Begin/Begin';
 import Finalize from './Finalize/Finalize';
 import { targetCustomer, targetTicket , loadDisplay } from '../../ducks/reducer'
 import { Link , withRouter } from 'react-router-dom'
+// import check from '../../lib/isLoggedIn'
 
 class Interaction extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class Interaction extends Component {
   // NEW TICKET SHOULD BE INVOKED WHILE CREATING THE INTERACTION, IF THE TICKET SLOT IS EMPTY //
 
   async componentDidMount() {
+    // check(this.props)
     try {
       let res = axios.get('/load/cust_name , cust_id/customer')
       this.setState({ customers: res.data })
