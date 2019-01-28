@@ -99,3 +99,8 @@ textarea {
     border-width: 2px 0px 0px 2px;
   }
 }
+
+.no-link:hover {
+  cursor: initial !important;
+  font-size: 13px !important;
+}

@@ -45,7 +45,7 @@ class Search extends Component {
           <div className="card-info">
             <div onClick={() => this.props.history.push(`/info/customer/${result.cust_id}`)}>Client: {result.cust_name}</div>
             <div onClick={() => this.props.history.push(`/info/ticket/${result.tick_id}`)}>Ticket: {result.tick_id}</div>
-            <div onClick={() => this.props.history.push(`/info/agent/${result.agent_id}`)}>Agent: {result.agent_name}</div>
+            <div className="no-link">Agent: {result.agent_name}</div>
           </div>
           <div className="card-content" onClick={() => this.props.history.push(`/info/interaction/${result.inte_id}`)}>
             <p className="title">{result.inte_title.toUpperCase()}</p>

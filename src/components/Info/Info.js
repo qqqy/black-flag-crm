@@ -117,8 +117,8 @@ class Info extends Component {
             <p className="title"> {cust_name}</p>
           </div>
           <div className="card-info">
-            <div>{cust_email}</div>
-            <div>{cust_phone}</div>
+            <div className="no-link">{cust_email}</div>
+            <div className="no-link" >{cust_phone}</div>
           </div>
         </div>
         <div className="deck">
@@ -159,7 +159,7 @@ class Info extends Component {
       )
     })
 
-    const { tick_title , cust_name , tick_id , agent_name } = this.props.targetTicketInfo
+    const { tick_title , cust_name , tick_id , agent_name, cust_id } = this.props.targetTicketInfo
     return (
       <>
         <div className="info-bar left-def top">
@@ -167,9 +167,9 @@ class Info extends Component {
             <p className="title"> {tick_title}</p>
           </div>
           <div className="card-info">
-            <div>Client: {cust_name}</div>
-            <div>Ticket: {tick_id}</div>
-            <div>Agent: {agent_name}</div>
+            <div onClick={() => this.props.history.push(`/info/customer/${cust_id}`)} >Client: {cust_name}</div>
+            <div className="no-link" >Ticket: {tick_id}</div>
+            <div className="no-link" >Agent: {agent_name}</div>
           </div>
         </div>
         <div className="deck">
