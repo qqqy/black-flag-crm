@@ -14,7 +14,6 @@ const { CONNECTION_STRING , SERVER_PORT , SESSION_SECRET} = process.env
 const app = express()
 
 
-
 // MIDDLEWARE //
 
 app.use(express.json())
