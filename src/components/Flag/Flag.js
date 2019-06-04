@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 function Flag(props) {
   if(!props.id || props.flags.length === 0){return (<div>Loading...</div>)}
-  let target = props.flags.filter(val => val.flag_id == props.id)
+  let target = props.flags.filter(val => +val.flag_id === +props.id)
   let color = "#" + target[0].flag_staff
   let flagColor = "#" + target[0].flag_color
   let altSymbol = target[0].flag_decoration

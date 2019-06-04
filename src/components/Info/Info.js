@@ -183,7 +183,7 @@ class Info extends Component {
   }
 
   interactionView() {
-    const { inte_id, inte_title, inte_ticket, inte_body, inte_flag, inte_date } = this.props.targetInteractionInfo
+    const { inte_title, inte_ticket, inte_body, inte_flag, inte_date } = this.props.targetInteractionInfo
     return (
       <div className="interaction-view-main">
         <div className="card override">

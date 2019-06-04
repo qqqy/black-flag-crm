@@ -118,12 +118,12 @@ class Edit extends Component {
     const { type, id } = this.props.match.params
     var name = ''
     var column = ''
-    var pushString = '/'
+    // var pushString = '/'
     switch (type) {
       case 'interaction':
         name = 'inte_title'
         column = 'inte_id'
-        pushString = `/info/customer/${this.props.targetCustomerInfo.cust_id}`
+        // pushString = `/info/customer/${this.props.targetCustomerInfo.cust_id}`
         break
       case 'ticket':
         name = 'tick_title'
