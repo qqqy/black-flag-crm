@@ -5,10 +5,10 @@ import { loginAgent } from '../../ducks/reducer';
 import { Link } from 'react-router-dom'
 
 function Nav(props){
-  const {agent_name , agent_email , agent_company } = props.agent
+  const {agent_name , agent_email , agent_company , agent_picture } = props.agent
   return (
     <div className="nav-main">
-    <img src={props.pictureUrl + props.agent.agent_picture} alt={agent_name} />
+    <img src={agent_picture ? props.pictureUrl + agent_picture : null} alt={agent_name} />
     <p>{agent_name}</p>
     <p>{agent_email}</p>
     <p>{agent_company}</p>
