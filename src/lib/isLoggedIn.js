@@ -4,9 +4,8 @@ export default async function isLoggedIn(props){
   console.log("Checking Authorization...")
   try {
     let res = await axios.get('/test/session')
-    // console.log(res.data)
     if(!res.data.agent){
-      alert('Please Log In...')
+      console.log("User isn't logged-in!")
       props.history.push('/login')
     }
   } catch (error) {

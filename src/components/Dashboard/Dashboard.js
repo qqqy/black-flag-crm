@@ -1,6 +1,6 @@
 import React , { Component } from 'react';
-import './Dashboard.scss';
 import { connect } from 'react-redux';
+import './Dashboard.scss';
 import Search from '../Search/Search';
 import Nav from '../Nav/Nav';
 import Interaction from '../Interaction/Interaction';
@@ -8,9 +8,7 @@ import Info from '../Info/Info';
 import Edit from '../Edit/Edit';
 import { Switch , Route } from 'react-router-dom'
 import { loadInteractions , loadCustomers, loadFlags, loadTasks , loadTickets , loginAgent } from '../../ducks/reducer'
-// import check from '../../lib/isLoggedIn'
 import axios from 'axios';
-// import testSVG from '../../svg/svgTest.svg'
 
 class Dashboard extends Component{
   constructor(props){

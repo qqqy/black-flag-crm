@@ -137,7 +137,7 @@ class Interaction extends Component {
         return console.log('Failed to create new customer: ' , error.message)
       }
     }
-    if (this.state.newInteraction.inte_ticket == 0) {
+    if (+this.state.newInteraction.inte_ticket === 0) {
       try {
         let res = await axios.put('/new/ticket', this.state.newTicket)
         this.setState({ newInteraction: { ...this.state.newInteraction, inte_ticket: res.data.tick_id } })
@@ -147,7 +147,7 @@ class Interaction extends Component {
       // console.log("Should be First")
     }
     try {
-      let res = await axios.put('/new/interaction', this.state.newInteraction)
+      await axios.put('/new/interaction', this.state.newInteraction)
       // console.log("Should be second")
       // Try using withRouter here sometime.
       // this.props.history.push(`/info/interaction/${res.data.inte_id}`)

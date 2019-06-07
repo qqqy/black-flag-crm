@@ -29,7 +29,6 @@ module.exports = {
   async load(req , res){
     const db = req.app.get('db')
     const { column , table } = req.params
-    console.log(column)
     try {
       let options = await db.query(`select ${column} from ${table}`)
       res.status(200).send(options)

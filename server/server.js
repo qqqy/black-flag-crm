@@ -7,12 +7,11 @@ const lCtrl = require('./loadController')
 const sCtrl = require('./searchController')
 const wCtrl = require('./awsController')
 const uCtrl = require('./updateDatabaseController')
-const { CONNECTION_STRING , SERVER_PORT , SESSION_SECRET , AWS_ACCESS_KEY_ID , AWS_SECRET_ACCESS_KEY ,  BUCKET_NAME } = process.env
+const { CONNECTION_STRING , SERVER_PORT , SESSION_SECRET} = process.env
 
 // SETUP //
 
 const app = express()
-
 
 
 // MIDDLEWARE //
@@ -23,7 +22,7 @@ app.use(session({
   resave: false ,
   saveUninitialized: false
 }))
-app.use( express.static( `${__dirname}/../build` ) );
+// app.use( express.static( `${__dirname}/../build` ) );
 
 // TEST ENDPOINTS //
 
@@ -67,11 +66,10 @@ app.post('/upload/image' , wCtrl.uploadPicture)
 
 // DB CONNECTION & LISTENING //
 
-massive(CONNECTION_STRING).then(instance => {
-  app.set('db' , instance)
-  app.listen(SERVER_PORT , () => console.log(SERVER_PORT + ' is our port in the storm.') )
-})
-
-// TESTING EXPORTS //
-
-exports.db = app.get('db')
+massive(CONNECTION_STRING)
+  .then(instance => {
+    app.set('db' , instance)
+    app.listen(SERVER_PORT , () => console.log("SERVER: " + SERVER_PORT + ' is our port in the storm.') )
+  })
+  .catch((err) => console.log("ALERT: Database failed to connect. Check your connection string. \nMESSAGE: " , err.message)
+)
