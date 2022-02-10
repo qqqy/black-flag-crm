@@ -16,7 +16,7 @@
     "fs": "0.0.1-security",
     "massive": "^5.7.2",
     "multiparty": "^4.2.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
