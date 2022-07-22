@@ -12,7 +12,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
-    "file-type": "^10.7.0",
+    "file-type": "^16.5.4",
     "fs": "0.0.1-security",
     "massive": "^5.7.2",
     "multiparty": "^4.2.1",
